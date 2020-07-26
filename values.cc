@@ -13,6 +13,9 @@ using namespace std;
 #include "values.h"
 #include "listing.h"
 
+double caseAnswer = NAN;
+bool answered = false;
+
 double evaluateReduction(Operators operator_, double head, double tail)
 {
 	if (operator_ == ADD)
@@ -71,8 +74,8 @@ double evaluateArithmetic(double left, Operators operator_, double right)
 		break;
 	case REMAINDER:
 		result = (int)round(left) % (int)round(right);
-	//	cout
-	//		<< left << " % " << right << " = " << result << endl;
+		//cout
+		//	<< left << " % " << right << " = " << result << endl;
 		break;
 	case EXPONENT:
 		result = pow(left, right);
@@ -82,3 +85,17 @@ double evaluateArithmetic(double left, Operators operator_, double right)
 	return result;
 }
 
+double setCaseAnswer(double answer)
+{
+	if (!answered)
+	{
+		caseAnswer = answer;
+		answered = true;
+	}
+	return answer;
+}
+
+double getCaseAnswer()
+{
+	return caseAnswer;
+}

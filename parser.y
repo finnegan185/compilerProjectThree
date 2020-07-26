@@ -9,6 +9,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <cmath>
 
 using namespace std;
 
@@ -19,7 +20,9 @@ using namespace std;
 int yylex();
 void yyerror(const char* message);
 
-Symbols<int> symbols;
+Symbols<double> symbols;
+double *params;
+int n = 1;
 
 double result;
 
@@ -31,7 +34,7 @@ double result;
 {
 	CharPtr iden;
 	Operators oper;
-	int value;
+	double value;
 }
 
 %token <iden> IDENTIFIER
@@ -41,10 +44,11 @@ double result;
 %token ANDOP OROP NOTOP ARROW
 
 %token BEGIN_ BOOLEAN END ENDREDUCE FUNCTION INTEGER IS REDUCE RETURNS REAL IF ENDIF ELSE THEN
-
+	CASE ENDCASE WHEN OTHERS
 
 %type <value> body statement_ statement reductions expression relation term
-	factor primary exp binary_logic unary_logic
+	factor primary exp binary_logic unary_logic cases case
+
 %type <oper> operator
 
 %%
@@ -66,7 +70,7 @@ parameters:
 	parameters ',' parameter | parameter | ;
 
 parameter:
-	IDENTIFIER ':' type;
+	IDENTIFIER ':' type {symbols.insert($1, params[n]); n++;} ;
 
 type:
 	INTEGER |
@@ -83,7 +87,14 @@ statement_:
 statement:
 	expression |
 	REDUCE operator reductions ENDREDUCE {$$ = $3;} |
-	IF expression THEN statement_ ELSE statement_ ENDIF {$$ = $2 ? $4 : $6;};
+	IF expression THEN statement_ ELSE statement_ ENDIF {$$ = $2 ? $4 : $6;} |
+	CASE expression IS cases OTHERS ARROW statement_ ENDCASE {$$ = isnan(getCaseAnswer()) ? $7 : getCaseAnswer();} ;
+
+cases: 
+	cases case {$$ = isnan($<value>0) ? $<value>2 : $<value>1;} | {$$ = NAN;} ;
+
+case:
+	WHEN INT_LITERAL ARROW statement ';' {$$ = ($<value>-2 == $2) ? setCaseAnswer($4) : NAN;} ;
 
 operator:
 	ADDOP |	MULOP | REMOP | EXPOP | RELOP ;
@@ -109,7 +120,7 @@ relation:
 	term ;
 
 term:
-	term ADDOP factor {$$ = evaluateArithmetic($1, $2, $3);} |
+	term ADDOP factor {$$ = evaluateArithmetic($1, $2, $3); } |
 	factor ;
       
 factor:
@@ -135,6 +146,10 @@ void yyerror(const char* message)
 
 int main(int argc, char *argv[])    
 {
+	params = (double *) malloc(sizeof(double) * argc);
+	for (int n = 1; n < argc; n++){
+		params[n] = atof(argv[n]);
+	}
 	firstLine();
 	yyparse();
 	if (lastLine() == 0)

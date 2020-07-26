@@ -71,7 +71,11 @@ extern int yydebug;
     IF = 281,
     ENDIF = 282,
     ELSE = 283,
-    THEN = 284
+    THEN = 284,
+    CASE = 285,
+    ENDCASE = 286,
+    WHEN = 287,
+    OTHERS = 288
   };
 #endif
 
@@ -80,13 +84,13 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 31 "parser.y" /* yacc.c:1909  */
+#line 34 "parser.y" /* yacc.c:1909  */
 
 	CharPtr iden;
 	Operators oper;
-	int value;
+	double value;
 
-#line 90 "parser.tab.h" /* yacc.c:1909  */
+#line 94 "parser.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;

@@ -59,7 +59,7 @@ void appendError(ErrorCategories errorCategory, string message)
 {
 	string messages[] = {"Lexical Error, Invalid Character ", "",
 						 "Semantic Error, ", "Semantic Error, Duplicate Identifier: ",
-						 "Syntax Error, Undeclared "};
+						 "syntax Error, Undeclared "};
 
 	std::size_t lexFound = messages[errorCategory].find("Lexical");
 	std::size_t semFound = message.find("Semantic");

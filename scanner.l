@@ -8,6 +8,7 @@
 %{
 #include <cstdio>
 #include <string>
+#include <iostream>
 
 using namespace std;
 
@@ -24,9 +25,9 @@ comment	\-\-.*\n|\/\/.*\n
 line		[\n]
 id			[A-Za-z][A-Za-z0-9]*(\_?[A-Za-z0-9]+)*
 digit		[0-9]
-int		{digit}+
+int		-?{digit}+
 punc		[\(\),:;]
-real_lit	{int}*(\.?{int}*)?([eE][+|-]?{int}+)?
+real_lit	{digit}+\.{digit}*([eE][+|-]?{digit}+)?
 %%
 
 {ws}		   { ECHO; }
@@ -44,6 +45,7 @@ real_lit	{int}*(\.?{int}*)?([eE][+|-]?{int}+)?
 "/"		   { ECHO; yylval.oper = DIVIDE; return(MULOP); }
 "rem"		   { ECHO; yylval.oper = REMAINDER; return(MULOP); }
 "**"		   { ECHO; yylval.oper = EXPONENT; return(EXPOP); }
+"=>"	   	{ ECHO; return(ARROW); }
 begin	   	{ ECHO; return(BEGIN_); }
 boolean		{ ECHO; return(BOOLEAN); }
 end		   { ECHO; return(END); }
@@ -60,6 +62,10 @@ endif		   { ECHO; return(ENDIF); }
 if			   { ECHO; return(IF); }
 else		   { ECHO; return(ELSE); }
 then		   { ECHO; return(THEN); }
+case		   { ECHO; return(CASE); }
+endcase		{ ECHO; return(ENDCASE); }
+others		{ ECHO; return(OTHERS); }
+when		   { ECHO; return(WHEN); }
 and		   { ECHO; return(ANDOP); }
 or			   { ECHO; return(OROP); }
 not			{ ECHO; return(NOTOP); }

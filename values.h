@@ -23,3 +23,5 @@ enum Operators
 double evaluateReduction(Operators operator_, double head, double tail);
 double evaluateRelational(double left, Operators operator_, double right);
 double evaluateArithmetic(double left, Operators operator_, double right);
+double setCaseAnswer(double answer);
+double getCaseAnswer();
