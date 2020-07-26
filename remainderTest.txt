@@ -1,0 +1,8 @@
+// Function testing precedence of basic math operators
+// By Zack Finnegan
+
+function main returns boolean;
+begin
+    5 rem 5 ;
+end;
+

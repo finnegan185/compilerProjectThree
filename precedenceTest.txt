@@ -1,0 +1,8 @@
+// Function testing precedence of basic math operators
+// By Zack Finnegan
+
+function main returns boolean;
+begin
+    5 - 3 * 80 / (2 + 3);
+end;
+

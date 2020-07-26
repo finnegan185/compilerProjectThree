@@ -1,0 +1,8 @@
+// Function testing less equal
+// By Zack Finnegan
+
+function main returns boolean;
+begin
+    12 <= 13 ;
+end;
+

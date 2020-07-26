@@ -1,0 +1,8 @@
+// Function testing greater equal
+// By Zack Finnegan
+
+function main returns boolean;
+begin
+    12 >= 12 ;
+end;
+

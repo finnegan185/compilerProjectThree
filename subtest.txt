@@ -1,0 +1,8 @@
+// Function testing subtraction
+// By Zack Finnegan
+
+function main returns boolean;
+begin
+    8 - 2 ;
+end;
+

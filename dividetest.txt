@@ -1,0 +1,8 @@
+// Function testing division
+// By Zack Finnegan
+
+function main returns boolean;
+begin
+    80 / 5 ;
+end;
+
