@@ -1,7 +1,7 @@
 /* Compiler Theory and Design
    Code edited by Zack Finnegan 
    from code created by Dr. Duane J. Jarc
-   Date: 7.9.2020 */
+   Date: 7.26.2020 */
 
 /* This file contains flex input file */
 
@@ -62,8 +62,8 @@ endif		   { ECHO; return(ENDIF); }
 if			   { ECHO; return(IF); }
 else		   { ECHO; return(ELSE); }
 then		   { ECHO; return(THEN); }
-case		   { ECHO; return(CASE); }
-endcase		{ ECHO; return(ENDCASE); }
+case		   { ECHO; caseCalled(); return(CASE); }
+endcase		{ ECHO; endcaseCalled(); return(ENDCASE); }
 others		{ ECHO; return(OTHERS); }
 when		   { ECHO; return(WHEN); }
 and		   { ECHO; return(ANDOP); }

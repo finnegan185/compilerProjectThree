@@ -1,4 +1,4 @@
-// Function testing less equal
+// Function testing greater than or equal
 // By Zack Finnegan
 
 function main returns boolean;

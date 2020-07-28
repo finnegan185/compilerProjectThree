@@ -1,4 +1,4 @@
-// Function testing precedence of basic math operators
+// Function testing greater than
 // By Zack Finnegan
 
 function main returns boolean;

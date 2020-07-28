@@ -1,7 +1,6 @@
 -- Nested if
 
-function main a: integer returns integer;
-    b: integer is 8;
+function main a: integer, b: integer returns integer;
 begin
     if a then
         if b then

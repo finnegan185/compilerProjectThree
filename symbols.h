@@ -1,5 +1,7 @@
-// Compiler Theory and Design
-// Dr. Duane J. Jarc
+// CMSC 430
+// Code edited by Zack Finnegan from code written by
+// Duane J. Jarc
+// 7/26/2020
 
 template <typename T>
 class Symbols

@@ -1,5 +1,7 @@
 // CMSC 430
+// Code edited by Zack Finnegan from code written by
 // Duane J. Jarc
+// 7/26/2020
 
 // This file contains the bodies of the evaluation functions
 
@@ -15,6 +17,11 @@ using namespace std;
 
 double caseAnswer = NAN;
 bool answered = false;
+int cases = 0;
+bool isNestedCase = false;
+bool isOuterCaseBad = false;
+bool isFirst = true;
+double outerCaseExp = NAN;
 
 double evaluateReduction(Operators operator_, double head, double tail)
 {
@@ -85,17 +92,80 @@ double evaluateArithmetic(double left, Operators operator_, double right)
 	return result;
 }
 
-double setCaseAnswer(double answer)
+
+
+
+
+/*
+
+	I need to set the outer case expression to a value right away as a global variable.
+	RIght now back 6 is not taking the expresson from the outer case but the value before
+	the ; in the line directly above it.
+
+*/
+
+
+
+
+
+
+
+
+double checkCase(double back4, double back2, double forward2, double answer)
 {
-	if (!answered)
+	isFirstCheck(back2);
+	nestedCaseCheck(back4);
+	if (back2 == forward2)
 	{
-		caseAnswer = answer;
-		answered = true;
+		if (cases == 1 || cases > 1 && !isOuterCaseBad)
+		{
+			if (!answered)
+			{
+				caseAnswer = answer;
+				answered = true;
+				return answer;
+			}
+			return NAN;
+		}
+		else {
+			return NAN;
+		}
 	}
-	return answer;
+	else
+	{
+		return NAN;
+	}
+}
+
+void nestedCaseCheck(double back4){
+	if (cases > 1 && !isNestedCase)
+	{
+		isNestedCase = true;
+		if (outerCaseExp != back4)
+		{
+			isOuterCaseBad = true;
+		}
+	}
+}
+
+void isFirstCheck(double caseExpression){
+	if(isFirst){
+		outerCaseExp = caseExpression;
+		isFirst = false;
+	}
 }
 
 double getCaseAnswer()
 {
 	return caseAnswer;
+}
+
+void caseCalled()
+{
+	cases++;
+}
+
+void endcaseCalled()
+{
+	cases--;
 }

@@ -1,4 +1,5 @@
 -- Test from Project 3 requirements 
+-- Zack Finnegan
 
 function main a: integer, b: integer returns integer;
     c: integer is

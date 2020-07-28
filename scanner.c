@@ -547,7 +547,7 @@ char *yytext;
 /* Compiler Theory and Design
    Code edited by Zack Finnegan 
    from code created by Dr. Duane J. Jarc
-   Date: 7.9.2020 */
+   Date: 7.26.2020 */
 /* This file contains flex input file */
 #line 9 "scanner.l"
 #include <cstdio>
@@ -1003,12 +1003,12 @@ YY_RULE_SETUP
 case 33:
 YY_RULE_SETUP
 #line 65 "scanner.l"
-{ ECHO; return(CASE); }
+{ ECHO; caseCalled(); return(CASE); }
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
 #line 66 "scanner.l"
-{ ECHO; return(ENDCASE); }
+{ ECHO; endcaseCalled(); return(ENDCASE); }
 	YY_BREAK
 case 35:
 YY_RULE_SETUP

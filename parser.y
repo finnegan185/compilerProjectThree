@@ -1,5 +1,6 @@
 /* Compiler Theory and Design
    Code edited by Zack Finnegan
+   Date: 7/26/2020
    From code written by
    Dr. Duane J. Jarc */
 
@@ -91,10 +92,10 @@ statement:
 	CASE expression IS cases OTHERS ARROW statement_ ENDCASE {$$ = isnan(getCaseAnswer()) ? $7 : getCaseAnswer();} ;
 
 cases: 
-	cases case {$$ = isnan($<value>0) ? $<value>2 : $<value>1;} | {$$ = NAN;} ;
+	cases case {$$ = isnan($<value>1) ? $<value>2 : $<value>1;} | {$$ = NAN;} ;
 
 case:
-	WHEN INT_LITERAL ARROW statement ';' {$$ = ($<value>-2 == $2) ? setCaseAnswer($4) : NAN;} ;
+	WHEN INT_LITERAL ARROW statement ';' {$$ = checkCase($<value>-4, $<value>-2, $2, $4);} ;
 
 operator:
 	ADDOP |	MULOP | REMOP | EXPOP | RELOP ;
